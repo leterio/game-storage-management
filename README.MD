@@ -12,7 +12,7 @@ PENDENTE
 
 ## Protótipo
 
-PENDENTE
+[Figma](https://www.figma.com/file/EEVxUzwVLYVadUY87OmtXB/GameLibraryPrototype)
 
 ## Checklist
 
