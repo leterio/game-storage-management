@@ -1,0 +1,26 @@
+.image-container {
+  /* --local-image-container-size: 16em; */
+  max-width: 100%;
+  height: var(--local-image-container-size);
+  height: 16em;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container > img.image-main {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  position: absolute;
+  z-index: 2;
+}
+
+.image-container > img.image-background {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+  filter: blur(calc(var(--font-size) * 1.5));
+  transform: scale(1.25);
+}
