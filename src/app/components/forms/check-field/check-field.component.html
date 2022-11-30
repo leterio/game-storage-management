@@ -1,0 +1,11 @@
+<div class="form-check">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    name="{{ fieldName }}"
+    id="{{ fieldId }}"
+    [ngModel]="fieldValue"
+    (ngModelChange)="onChange($event)"
+  />
+  <label class="form-check-label" for="{{ fieldId }}">{{ fieldLabel }}</label>
+</div>

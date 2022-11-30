@@ -1,0 +1,30 @@
+<header class="sticky-top d-print-none">
+  <nav class="navbar navbar-title navbar-expand-lg">
+    <div class="container">
+      <span class="navbar-brand m-0 pl-1 h1">{{ appName }}</span>
+      <button
+        *ngIf="routes.length > 0"
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <nav *ngIf="routes.length > 0" class="navbar navbar-menu navbar-expand-lg p-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="container">
+        <ul class="navbar-nav">
+          <li *ngFor="let route of routes" class="nav-item">
+            <a class="nav-link" routerLink="{{ route.path }}">{{ route.title }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
