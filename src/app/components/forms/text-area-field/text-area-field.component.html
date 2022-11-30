@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label for="{{ fieldId }}"><span *ngIf="fieldRequired">* </span>{{ fieldLabel }}</label>
+  <textarea
+    class="form-control"
+    id="{{ fieldId }}"
+    name="{{ fieldName }}"
+    rows="{{ fieldRows }}"
+    [style.resize]="styleResize()"
+    [ngModel]="fieldValue"
+    (ngModelChange)="onChange($event)"
+  ></textarea>
+</div>

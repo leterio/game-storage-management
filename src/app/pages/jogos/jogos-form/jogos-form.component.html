@@ -1,0 +1,122 @@
+<page-title [title]="pageTitle"></page-title>
+<form class="form-edit container" autocomplete="off">
+  <div class="row">
+    <div class="col-sm-12 col-lg-5 col-xl-4 order-lg-2 px-0">
+      <image-field
+        fieldId="cadastro-imagem"
+        fieldName="imagem"
+        fieldLabel="Imagem"
+        [(fieldValue)]="jogo.imagem"
+      ></image-field>
+    </div>
+    <div class="col-sm-12 col-lg-7 col-xl-8 order-lg-1">
+      <div class="row my-2">
+        <div class="col">
+          <text-field
+            fieldId="cadastro-titulo"
+            fieldName="titulo"
+            fieldLabel="Título"
+            [fieldRequired]="true"
+            [(fieldValue)]="jogo.titulo"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-genero"
+            fieldName="genero"
+            fieldLabel="Gênero"
+            [(fieldValue)]="jogo.genero"
+          ></text-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-plataforma"
+            fieldName="plataforma"
+            fieldLabel="Plataforma"
+            [fieldRequired]="true"
+            [(fieldValue)]="jogo.plataforma"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <text-field
+            fieldId="cadastro-desenvolvedora"
+            fieldName="desenvolvedora"
+            fieldLabel="Desenvolvedora"
+            [(fieldValue)]="jogo.desenvolvedora"
+          ></text-field>
+        </div>
+        <div class="col">
+          <text-field
+            fieldId="cadastro-publicadora"
+            fieldName="publicadora"
+            fieldLabel="Publicadora"
+            [(fieldValue)]="jogo.publicadora"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-12 col-xl-6">
+          <div class="row my-2">
+            <div class="col-6 my-2">
+              <check-field
+                fieldId="precisa_reparos"
+                fieldName="precisa_reparos"
+                fieldLabel="Precisa de Reparos"
+                [(fieldValue)]="jogo.precisaReparos"
+              ></check-field>
+            </div>
+            <div class="col-6 my-2">
+              <check-field
+                fieldId="emprestado"
+                fieldName="emprestado"
+                fieldLabel="Emprestado"
+                [(fieldValue)]="jogo.emprestado"
+              ></check-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+          <text-field
+            fieldId="cadastro-serial"
+            fieldName="serial"
+            fieldLabel="Serial"
+            [(fieldValue)]="jogo.serial"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <drop-down-field
+          fieldId="cadastro-prateleira"
+          fieldName="prateleira"
+          fieldLabel="Prateleira"
+          [fieldRequired]="true"
+          ></drop-down-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <text-area-field
+            fieldId="cadastro-detalhes"
+            fieldName="detalhes"
+            fieldLabel="Detalhes / Notas"
+            [fieldRows]="5"
+            [(fieldValue)]="jogo.detalhes"
+          ></text-area-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row py-2">
+    <div class="col">
+      <div class="text-center">
+        <button class="btn" type="button" onclick="history.back();">Voltar</button>
+        <button class="btn" type="button" (click)="onSave()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</form>
