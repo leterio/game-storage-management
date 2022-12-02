@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ImageFieldComponent } from 'src/app/components/forms/image-field/image-field.component';
 import { Constants } from 'src/app/helper/constants';
 import { MockHelper } from 'src/app/helper/mock-helper';
 import { BaseEntityService } from '../base-entity-service';
@@ -10,10 +9,13 @@ import { Image, Images } from './image';
   providedIn: 'root',
 })
 export class ImageService extends BaseEntityService<Image, number> {
+  private static localStorageKey: string = 'imageDatabase';
+
   public getById(id: number): Observable<Image | undefined> {
     let image: Image | undefined;
 
-    if (Constants.imageMocked) image = ImageService.mocked()[0];
+    if (Constants.imageMocked) image = this.mocked()[0];
+    if (Constants.imageLocalStorage) image = super.getByIdLocalStorage(ImageService.localStorageKey, id);
     else image = undefined;
 
     return of(image);
@@ -23,7 +25,19 @@ export class ImageService extends BaseEntityService<Image, number> {
     return new Image();
   }
 
-  public static mocked(count: number = 1): Images {
+  public save(image: Image): Observable<number | undefined> {
+    if (Constants.imageMocked) return of(1);
+    else if (Constants.imageLocalStorage) return of(this.saveLocalStorage(ImageService.localStorageKey, image));
+    return of(undefined);
+  }
+
+  public remove(image: Image): Observable<boolean> {
+    if (Constants.jogosMocked) return of(true);
+    else if (Constants.jogosLocalStorage) return of(this.removeLocalStorage(ImageService.localStorageKey, image));
+    return of(true);
+  }
+
+  private mocked(count: number = 1): Images {
     if (count <= 1) return [new ImageMock()];
 
     let jogos: Images = [];
@@ -35,8 +49,8 @@ export class ImageService extends BaseEntityService<Image, number> {
 class ImageMock extends Image {
   private static counter: number = 1;
 
-  constructor(alt: string = MockHelper.getWords(3)) {
-    super(ImageMock.counter++, alt, ImageMock.generatePlaceholder());
+  constructor() {
+    super(ImageMock.counter++, ImageMock.generatePlaceholder());
   }
 
   private static generatePlaceholder(): string {

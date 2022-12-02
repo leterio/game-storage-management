@@ -1,11 +1,13 @@
 <div class="form-check">
   <input
-    class="form-check-input"
-    type="checkbox"
-    name="{{ fieldName }}"
+    #thisInput
     id="{{ fieldId }}"
+    name="{{ fieldName }}"
+    type="checkbox"
+    class="form-check-input"
     [ngModel]="fieldValue"
     (ngModelChange)="onChange($event)"
+    (click)="click()"
   />
   <label class="form-check-label" for="{{ fieldId }}">{{ fieldLabel }}</label>
 </div>

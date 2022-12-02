@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { ActionImage, Image } from '../../../entity/image/image';
 
 @Component({
@@ -13,11 +12,15 @@ export class ImageContainerComponent {
 
   constructor(private router: Router) {}
 
+  hasAction(): boolean {
+    if (this.image instanceof ActionImage && (this.image.clickRoute || this.image.clickHandler)) return true;
+    else return false;
+  }
+
   imageClicked() {
     if (this.image instanceof ActionImage) {
       if (this.image.clickRoute) {
         this.router.navigate([this.image.clickRoute]);
-        console.log(`navigate to ${this.image.clickRoute}`);
       } else if (this.image.clickHandler) {
         this.image.clickHandler();
       }
