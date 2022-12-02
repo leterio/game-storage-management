@@ -1,5 +1,5 @@
-<div class="image-container" (click)="imageClicked()">
+<div class="image-container" [class.has-action]="hasAction()" (click)="imageClicked()">
   <div class="overlay"></div>
-  <img *ngIf="image?.src" class="image-main" alt="{{ image?.alt }}" src="{{ image?.src }}" />
-  <img *ngIf="image?.src" class="image-background" alt="{{ image?.alt }}" src="{{ image?.src }}" />
+  <img *ngIf="image?.src" class="image-main" src="{{ image?.src }}" />
+  <img *ngIf="image?.src" class="image-background" src="{{ image?.src }}" />
 </div>

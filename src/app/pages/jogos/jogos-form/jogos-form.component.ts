@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { ActionImage } from 'src/app/entity/image/image';
 import { Jogo } from 'src/app/entity/jogo/jogo';
-import { JogoService } from 'src/app/entity/jogo/jogo-service';
+import { JogoService } from 'src/app/entity/jogo/jogo.service';
 import { Utils } from 'src/app/helper/utils';
 
 @Component({
@@ -10,34 +12,71 @@ import { Utils } from 'src/app/helper/utils';
 })
 export class JogosFormComponent implements OnInit {
   pageTitle!: string;
+  editMode!: boolean;
+  newMode!: boolean;
   jogo!: Jogo;
 
-  constructor(public activatedRoute: ActivatedRoute, public jogoService: JogoService) {}
+  constructor(private router: Router, public activatedRoute: ActivatedRoute, public jogoService: JogoService) {}
 
-  ngOnInit(): void {
-    console.log(this.activatedRoute);
-    this.initJogo();
+  resetPage(): void {
+    this.pageTitle = 'Cadastro de jogo';
+    this.editMode = true;
+    this.newMode = true;
+    this.jogo = this.jogoService.newEmpty();
   }
 
-  private initJogo(): void {
+  ngOnInit(): void {
+    this.resetPage();
+    this.checkOpenedForView();
+  }
+
+  private checkOpenedForView() {
     let id: number | undefined = Utils.tryParseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    console.log(id);
     if (id) {
-      this.jogoService.getById(id).subscribe((jogo) => {
-        if (jogo) {
-          this.jogo = <Jogo>jogo;
-          this.pageTitle = `Editando: ${jogo.titulo}`;
+      this.editMode = false;
+      this.pageTitle = 'Carregando jogo para visualização ...';
+      firstValueFrom(this.jogoService.getById(id)).then((_jogo) => {
+        if (_jogo) {
+          this.pageTitle = _jogo.titulo;
+          if (_jogo.imagem && _jogo.imagem instanceof ActionImage) {
+            _jogo.imagem = (<ActionImage>_jogo.imagem).toImage();
+          }
+          this.newMode = false;
+          this.jogo = _jogo;
+        } else {
+          this.resetPage();
         }
       });
     }
+  }
 
-    if (!this.jogo) {
-      this.jogo = this.jogoService.newEmpty();
-      this.pageTitle = 'Novo Jogo';
+  enterEditMode(): void {
+    this.editMode = true;
+    if (!this.newMode) {
+      this.pageTitle = `Editando: ${this.jogo?.titulo}`;
     }
   }
 
-  onSave(): void {
-    console.log(this.jogo);
+  async onSubmit(): Promise<void> {
+    let savedId = await firstValueFrom(this.jogoService.save(this.jogo));
+    if (savedId) {
+      window.alert(`Jogo salvo. ID: ${savedId}`);
+      this.router.navigate([`/jogos/${savedId}`]);
+    } else {
+      window.alert(`Erro ao salvar jogo`);
+    }
+  }
+
+  remove() {
+    if (window.confirm(`Deseja realmente remover o jogo "${this.jogo.titulo}?"`)) {
+      this.jogoService.remove(this.jogo).subscribe((success) => {
+        window.alert(`Jogo "${this.jogo.titulo}" removido`);
+        this.router.navigate(['/jogos/']);
+      });
+    }
+  }
+
+  back() {
+    history.back();
   }
 }

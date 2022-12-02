@@ -1,5 +1,4 @@
-import { ImplicitReceiver } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'page-title[title]',
