@@ -2,13 +2,7 @@
 <form class="form-edit container" autocomplete="off" (submit)="onSubmit()" #editForm>
   <div class="row">
     <div class="col-sm-12 col-lg-5 col-xl-4 order-lg-2 px-0">
-      <image-field
-        fieldId="cadastro-imagem"
-        fieldName="imagem"
-        fieldLabel="Imagem"
-        [(fieldValue)]="jogo.imagem"
-        [fieldReadOnly]="!editMode"
-      ></image-field>
+      <image-field [(fieldValue)]="imagem" [fieldReadOnly]="!editMode"></image-field>
     </div>
     <div class="col-sm-12 col-lg-7 col-xl-8 order-lg-1">
       <div class="row my-2" *ngIf="editMode">
