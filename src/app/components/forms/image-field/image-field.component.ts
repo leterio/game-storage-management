@@ -5,7 +5,7 @@ import { AbstractField } from '../abstract-field';
 @Component({
   selector: 'image-field',
   templateUrl: './image-field.component.html',
-  styleUrls: ['./image-field.component.css'],
+  styleUrls: ['./image-field.component.css', '../forms-commom.css'],
 })
 export class ImageFieldComponent extends AbstractField<Image> {
   acceptedTypes: string[] = ['image/png', 'image/jpeg', 'image/bmp'];

@@ -1,0 +1,20 @@
+.form-control,
+.form-control:focus,
+.form-check-input,
+.form-check-input:checked {
+  font-size: var(--font-size);
+  background-color: var(--field-bg);
+  color: var(--font-color);
+  border: none;
+}
+
+.form-control:focus:not(.is-invalid),
+.form-control:hover:not(.is-invalid),
+.form-check-input:focus,
+.form-check-input:hover {
+  box-shadow: var(--field-box-shadow);
+}
+
+.form-control.is-invalid {
+  box-shadow: var(--default-box-shadow-configuration) var(--field-error-box-shadow-color);
+}

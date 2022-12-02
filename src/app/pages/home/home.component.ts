@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   private loadJogosImageArray(): void {
-    const jogos: Observable<Jogos> = this.jogoService.listTop(4);
+    const jogos: Observable<Jogos> = this.jogoService.list(4);
     jogos.subscribe((jogos) => {
       this.jogosImageArray = <Images>(
         jogos.filter((jogo) => jogo.imagem !== undefined && jogo.imagem !== null).map((jogo) => jogo.imagem)
