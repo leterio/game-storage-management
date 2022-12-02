@@ -2,10 +2,8 @@ import { Image } from '../image/image';
 
 export declare type Jogos = Jogo[];
 export class Jogo {
-  public imagem?: Image;
-
   constructor(
-    public id?: number,
+    public id?: string,
     public titulo: string = '',
     public genero: string = '',
     public plataforma: string = '',
@@ -14,11 +12,8 @@ export class Jogo {
     public precisaReparos: boolean = false,
     public emprestado: boolean = false,
     public serial: string = '',
-    public prateleira: any = undefined,
-    public detalhes: string = ''
+    public prateleiraId: any = undefined,
+    public detalhes: string = '',
+    public imagemId: string = ''
   ) {}
-
-  public toString(): string {
-    return JSON.stringify(this, null, 4);
-  }
 }

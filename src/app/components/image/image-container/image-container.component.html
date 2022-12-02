@@ -1,5 +1,12 @@
 <div class="image-container" [class.has-action]="hasAction()" (click)="imageClicked()">
   <div class="overlay"></div>
-  <img *ngIf="image?.src" class="image-main" src="{{ image?.src }}" />
-  <img *ngIf="image?.src" class="image-background" src="{{ image?.src }}" />
+  <div *ngIf="image && image.src && image.src.length > 0">
+    <img class="image-main" src="{{ image.src }}" />
+    <img class="image-background" src="{{ image.src }}" />
+  </div>
+  <div *ngIf="!image || !image.src || image.src.length == 0">
+    <img class="image-main" src="assets/default-image.png" />
+    <img class="image-background" src="assets/default-image.png" />
+  </div>
 </div>
+<div *ngIf="image?.label" class="label text-center py-2">{{ image?.label }}</div>

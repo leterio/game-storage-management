@@ -4,9 +4,9 @@ export class Constants {
   public static appName: string = 'Game Storage Management';
 
   public static everythingMocked: boolean = false;
-  public static everythingLocalStorage: boolean = true;
+  public static everythingLocalStorage: boolean = false;
 
-  public static imageMocked: boolean = false || Constants.everythingMocked;
+  public static imageMocked: boolean = true || Constants.everythingMocked;
   public static jogosMocked: boolean = false || Constants.everythingMocked;
 
   public static imageLocalStorage: boolean = false || Constants.everythingLocalStorage;

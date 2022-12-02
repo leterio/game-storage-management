@@ -1,13 +1,9 @@
+import { v4 as uuid } from 'uuid';
 export class Utils {
   private constructor() {}
 
-  public static tryParseInt(string: string | undefined | null): number | undefined {
-    if (string === null || string === undefined) return undefined;
-    try {
-      return parseInt(string);
-    } catch {
-      return undefined;
-    }
+  public static generateEntityId(): string {
+    return uuid();
   }
 
   public static valueOrDefault<T>(value: T | undefined, _default: T): T {

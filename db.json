@@ -1,0 +1,18 @@
+{
+  "jogos": [
+    {
+      "id": "22ee5dcf-59b9-41db-a67d-ba6c3964db93",
+      "titulo": "Um jogo qualquer",
+      "genero": "Gênero do jogo qualquer",
+      "plataforma": "Plataforma do jogo qualquer",
+      "desenvolvedora": "Desenvolvedora do jogo qualquer",
+      "publicadora": "Publicadora do jogo qualquer",
+      "precisaReparos": true,
+      "emprestado": true,
+      "serial": "Serial do jogo qualquer",
+      "detalhes": "Detalhes / Notas do jogo qualquer",
+      "imagemId": "2d6f1fcb-eee8-4ad1-9dfd-0a0a4b2f0599"
+    }
+  ],
+  "images": []
+}

@@ -1,33 +1,43 @@
-import { map, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, of, throwError } from 'rxjs';
+import { Utils } from '../helper/utils';
 
-export abstract class BaseEntityService<T, P> {
+export abstract class BaseEntityService<T> {
   abstract get localStorageKey(): string;
+  abstract get jsonServerEntity(): string;
   abstract get useMocks(): boolean;
   abstract get useLocalStorage(): boolean;
+
+  constructor(protected httpClient: HttpClient) {}
 
   public list(total: number, currentPage?: number): Observable<T[]> {
     if (total <= 0) return of([]);
 
-    let results: T[] = [];
+    let observableResults: Observable<T[]>;
     if (this.useMocks) {
-      if (total == 1) results = [this.generateMock()];
+      if (total == 1) observableResults = of([this.generateMock()]);
       else {
+        let mockedResults: T[] = [];
         for (let i = 0; i < total; i++) {
-          results.push(this.generateMock());
+          mockedResults.push(this.generateMock());
         }
+        observableResults = of(mockedResults);
       }
-    } else if (this.useLocalStorage) {
-      results = this.listLocalStorage(total, currentPage);
-    }
+    } else if (this.useLocalStorage) observableResults = of(this.listLocalStorage(total, currentPage));
+    else observableResults = this.listJsonServer(total, currentPage);
 
-    for (let result of results) {
-      this.postProcessResult(result);
-    }
-
-    return of(results);
+    return observableResults.pipe(
+      map((resultsEmitted) => {
+        let newResults: T[] = [];
+        for (let resultEmitted of resultsEmitted) {
+          newResults.push(this.copyClean(resultEmitted));
+        }
+        return newResults;
+      })
+    );
   }
 
-  protected listLocalStorage(total?: Number, currentPage?: number): T[] {
+  private listLocalStorage(total?: Number, currentPage?: number): T[] {
     let localStorageJSON = localStorage.getItem(this.localStorageKey);
     if (!localStorageJSON) return [];
 
@@ -46,21 +56,28 @@ export abstract class BaseEntityService<T, P> {
     return listed;
   }
 
-  public getById(id: P): Observable<T | undefined> {
-    let result: T | undefined;
-
-    if (this.useMocks) result = this.generateMock();
-    else if (this.useLocalStorage) result = this.getByIdLocalStorage(id);
-    else result = undefined;
-
-    if (result) {
-      this.postProcessResult(result);
-    }
-
-    return of(result);
+  private listJsonServer(total?: Number, currentPage?: number): Observable<T[]> {
+    return this.httpClient.get<T[]>(`http://localhost:3000/${this.jsonServerEntity}`);
   }
 
-  protected getByIdLocalStorage(id: P): T | undefined {
+  public getById(id: string): Observable<T | undefined> {
+    let observableResult: Observable<T | undefined>;
+
+    if (this.useMocks) observableResult = of(this.generateMock());
+    else if (this.useLocalStorage) observableResult = of(this.getByIdLocalStorage(id));
+    else observableResult = this.getByIdJsonServer(id);
+
+    return observableResult.pipe(
+      map((resultEmitted) => {
+        if (resultEmitted) {
+          return this.copyClean(resultEmitted);
+        }
+        return undefined;
+      })
+    );
+  }
+
+  private getByIdLocalStorage(id: string): T | undefined {
     let localStorageJSON = localStorage.getItem(this.localStorageKey);
     if (!localStorageJSON) return undefined;
 
@@ -69,17 +86,17 @@ export abstract class BaseEntityService<T, P> {
     return localStorageDatabase[id];
   }
 
-  public save(object: T): Observable<P | undefined> {
-    let resultKey: P | undefined;
-
-    if (this.useMocks) resultKey = <P>1;
-    else if (this.useLocalStorage) resultKey = this.saveLocalStorage(object);
-    else resultKey = undefined;
-
-    return of(resultKey);
+  private getByIdJsonServer(id: string): Observable<T | undefined> {
+    return this.httpClient.get<T | undefined>(`http://localhost:3000/${this.jsonServerEntity}/${id}`);
   }
 
-  protected saveLocalStorage(object: T): P {
+  public save(object: T): Observable<string> {
+    if (this.useMocks) return of(Utils.generateEntityId());
+    else if (this.useLocalStorage) return of(this.saveLocalStorage(object));
+    else return this.saveJsonServer(object);
+  }
+
+  private saveLocalStorage(object: T): string {
     let localStorageJSON = localStorage.getItem(this.localStorageKey);
     let localStorageDatabase: any;
 
@@ -90,7 +107,7 @@ export abstract class BaseEntityService<T, P> {
     }
 
     if (!(<any>object).id) {
-      (<any>object).id = new Date().getTime();
+      (<any>object).id = Utils.generateEntityId();
     }
 
     localStorageDatabase[(<any>object).id] = object;
@@ -101,19 +118,35 @@ export abstract class BaseEntityService<T, P> {
     return (<any>object).id;
   }
 
-  public remove(id: P): Observable<boolean> {
-    let success: boolean;
+  private saveJsonServer(object: T): Observable<string> {
+    let operationResult: Observable<any>;
 
-    if (this.useMocks) success = true;
-    else if (this.useLocalStorage) success = this.removeLocalStorage(id);
-    else success = true;
+    if (!(<any>object).id) {
+      (<any>object).id = Utils.generateEntityId();
+      operationResult = this.httpClient.post(`http://localhost:3000/${this.jsonServerEntity}`, this.copyClean(object));
+    } else {
+      operationResult = this.httpClient.put(
+        `http://localhost:3000/${this.jsonServerEntity}/${(<any>object).id}`,
+        object
+      );
+    }
 
-    return of(success);
+    return operationResult.pipe(
+      map((result) => {
+        return (<any>result).id;
+      })
+    );
   }
 
-  protected removeLocalStorage(id: P): boolean {
+  public remove(id: string): Observable<void> {
+    if (this.useMocks) return of();
+    else if (this.useLocalStorage) return of(this.removeLocalStorage(id));
+    else return this.removeJsonServer(id);
+  }
+
+  private removeLocalStorage(id: string): void {
     let localStorageJSON = localStorage.getItem(this.localStorageKey);
-    if (!localStorageJSON) return true;
+    if (!localStorageJSON) return;
 
     let localStorageDatabase = JSON.parse(localStorageJSON);
 
@@ -121,15 +154,19 @@ export abstract class BaseEntityService<T, P> {
 
     localStorageJSON = JSON.stringify(localStorageDatabase);
     localStorage.setItem(this.localStorageKey, localStorageJSON);
+  }
 
-    return true;
+  private removeJsonServer(id: string): Observable<void> {
+    return this.httpClient.delete(`http://localhost:3000/${this.jsonServerEntity}/${id}`).pipe(
+      map(() => {
+        return;
+      })
+    );
   }
 
   public abstract newEmpty(): T;
 
-  protected postProcessResult(result: T): void {
-    // Do nothing here!
-  }
+  public abstract copyClean(object: T): T;
 
   protected abstract generateMock(): T;
 }

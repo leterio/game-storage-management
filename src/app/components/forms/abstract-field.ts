@@ -15,6 +15,7 @@ export abstract class AbstractField<T> {
   _fieldValue?: T;
   @Input() public set fieldValue(v: T | undefined) {
     this._fieldValue = v;
+    this.fieldValueChange.emit(v);
     this.updateEmpty();
   }
   public get fieldValue(): T | undefined {
@@ -37,7 +38,6 @@ export abstract class AbstractField<T> {
   onChange(newValue: T | undefined): void {
     this.fieldValue = newValue;
     this.updateEmpty();
-    this.fieldValueChange.emit(newValue);
   }
 
   onBlur(event: any): void {
