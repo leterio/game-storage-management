@@ -1,19 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Jogos } from 'src/app/entity/jogo/jogo';
+import { DataGridModel, DataGridModels } from 'src/app/components/data-grid/data-grid-model';
 import { JogoService } from 'src/app/entity/jogo/jogo.service';
 
 @Component({
   selector: 'pages-jogos-home',
   templateUrl: './jogos-home.component.html',
-  styleUrls: ['./jogos-home.component.css'],
 })
 export class JogosHomeComponent implements OnInit {
   constructor(private jogoService: JogoService) {}
 
-  jogos: Jogos = [];
+  jogos: DataGridModels = [];
 
   loadJogos(): void {
-    this.jogoService.list().subscribe((jogos) => (this.jogos = jogos));
+    this.jogoService.list(8).subscribe(
+      (subscribedJogos) =>
+        (this.jogos = subscribedJogos.map(
+          (mappedJogo) =>
+            <DataGridModel>{
+              image: mappedJogo.imagem,
+              title: mappedJogo.titulo,
+              field1: mappedJogo.plataforma,
+              field2: mappedJogo.genero,
+              field3: mappedJogo.serial,
+              field4: 'WIP',
+              routerLink: `/jogos/${mappedJogo.id}`,
+            }
+        ))
+    );
   }
 
   ngOnInit(): void {

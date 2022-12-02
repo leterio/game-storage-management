@@ -13,7 +13,7 @@
 }
 
 .image-loading-container .image-loading-message {
-  box-shadow: 0 0 2rem 2rem var(--bs-body-bg);
+  box-shadow: 0 0 2em 2em var(--bs-body-bg);
   font-size: calc(var(--font-size) * 2);
   background: var(--bs-body-bg);
 }

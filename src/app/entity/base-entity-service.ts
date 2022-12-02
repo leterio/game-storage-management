@@ -1,12 +1,34 @@
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 export abstract class BaseEntityService<T, P> {
-  public list(total?: number, currentPage?: number): Observable<T[]> {
-    throw new Error('Not Supported.');
+  abstract get localStorageKey(): string;
+  abstract get useMocks(): boolean;
+  abstract get useLocalStorage(): boolean;
+
+  public list(total: number, currentPage?: number): Observable<T[]> {
+    if (total <= 0) return of([]);
+
+    let results: T[] = [];
+    if (this.useMocks) {
+      if (total == 1) results = [this.generateMock()];
+      else {
+        for (let i = 0; i < total; i++) {
+          results.push(this.generateMock());
+        }
+      }
+    } else if (this.useLocalStorage) {
+      results = this.listLocalStorage(total, currentPage);
+    }
+
+    for (let result of results) {
+      this.postProcessResult(result);
+    }
+
+    return of(results);
   }
 
-  protected listLocalStorage(localStorageKey: string, total?: Number, currentPage?: number): T[] {
-    let localStorageJSON = localStorage.getItem(localStorageKey);
+  protected listLocalStorage(total?: Number, currentPage?: number): T[] {
+    let localStorageJSON = localStorage.getItem(this.localStorageKey);
     if (!localStorageJSON) return [];
 
     let localStorageDatabase = JSON.parse(localStorageJSON);
@@ -24,14 +46,22 @@ export abstract class BaseEntityService<T, P> {
     return listed;
   }
 
-  public listTop(count: number): Observable<T[]> {
-    throw new Error('Not Supported.');
+  public getById(id: P): Observable<T | undefined> {
+    let result: T | undefined;
+
+    if (this.useMocks) result = this.generateMock();
+    else if (this.useLocalStorage) result = this.getByIdLocalStorage(id);
+    else result = undefined;
+
+    if (result) {
+      this.postProcessResult(result);
+    }
+
+    return of(result);
   }
 
-  public abstract getById(id: P): Observable<T | undefined>;
-
-  protected getByIdLocalStorage(localStorageKey: string, id: P): T | undefined {
-    let localStorageJSON = localStorage.getItem(localStorageKey);
+  protected getByIdLocalStorage(id: P): T | undefined {
+    let localStorageJSON = localStorage.getItem(this.localStorageKey);
     if (!localStorageJSON) return undefined;
 
     let localStorageDatabase = JSON.parse(localStorageJSON);
@@ -39,12 +69,18 @@ export abstract class BaseEntityService<T, P> {
     return localStorageDatabase[id];
   }
 
-  public abstract newEmpty(): T;
+  public save(object: T): Observable<P | undefined> {
+    let resultKey: P | undefined;
 
-  public abstract save(object: T): Observable<P | undefined>;
+    if (this.useMocks) resultKey = <P>1;
+    else if (this.useLocalStorage) resultKey = this.saveLocalStorage(object);
+    else resultKey = undefined;
 
-  protected saveLocalStorage(localStorageKey: string, object: T): P {
-    let localStorageJSON = localStorage.getItem(localStorageKey);
+    return of(resultKey);
+  }
+
+  protected saveLocalStorage(object: T): P {
+    let localStorageJSON = localStorage.getItem(this.localStorageKey);
     let localStorageDatabase: any;
 
     if (localStorageJSON) {
@@ -60,26 +96,40 @@ export abstract class BaseEntityService<T, P> {
     localStorageDatabase[(<any>object).id] = object;
 
     localStorageJSON = JSON.stringify(localStorageDatabase);
-    localStorage.setItem(localStorageKey, localStorageJSON);
+    localStorage.setItem(this.localStorageKey, localStorageJSON);
 
     return (<any>object).id;
   }
 
-  public abstract remove(object: T): Observable<boolean>;
+  public remove(id: P): Observable<boolean> {
+    let success: boolean;
 
-  protected removeLocalStorage(localStorageKey: string, object: T): boolean {
-    if ((<any>object).id === undefined || (<any>object).id === null) return true;
+    if (this.useMocks) success = true;
+    else if (this.useLocalStorage) success = this.removeLocalStorage(id);
+    else success = true;
 
-    let localStorageJSON = localStorage.getItem(localStorageKey);
+    return of(success);
+  }
+
+  protected removeLocalStorage(id: P): boolean {
+    let localStorageJSON = localStorage.getItem(this.localStorageKey);
     if (!localStorageJSON) return true;
 
     let localStorageDatabase = JSON.parse(localStorageJSON);
 
-    localStorageDatabase[(<any>object).id] = undefined;
+    localStorageDatabase[id] = undefined;
 
     localStorageJSON = JSON.stringify(localStorageDatabase);
-    localStorage.setItem(localStorageKey, localStorageJSON);
+    localStorage.setItem(this.localStorageKey, localStorageJSON);
 
     return true;
   }
+
+  public abstract newEmpty(): T;
+
+  protected postProcessResult(result: T): void {
+    // Do nothing here!
+  }
+
+  protected abstract generateMock(): T;
 }

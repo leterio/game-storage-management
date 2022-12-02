@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '../router/router.module';
+import { DataGridComponent } from './data-grid/data-grid.component';
 import { CheckFieldComponent } from './forms/check-field/check-field.component';
 import { DropDownFieldComponent } from './forms/drop-down-field/drop-down-field.component';
 import { ImageFieldComponent } from './forms/image-field/image-field.component';
@@ -17,6 +18,7 @@ const components: Type<any>[] = [
   DropDownFieldComponent,
   TextAreaFieldComponent,
   ImageFieldComponent,
+  DataGridComponent,
 ];
 
 @NgModule({

@@ -9,6 +9,6 @@ export class Constants {
   public static imageMocked: boolean = false || Constants.everythingMocked;
   public static jogosMocked: boolean = false || Constants.everythingMocked;
 
-  public static imageLocalStorage: boolean = true || Constants.everythingLocalStorage;
-  public static jogosLocalStorage: boolean = true || Constants.everythingLocalStorage;
+  public static imageLocalStorage: boolean = false || Constants.everythingLocalStorage;
+  public static jogosLocalStorage: boolean = false || Constants.everythingLocalStorage;
 }
