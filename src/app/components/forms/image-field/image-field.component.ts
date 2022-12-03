@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Image } from '../../../entity/image/image';
 import { AbstractField } from '../abstract-field';
 
 @Component({
-  selector: 'image-field[fieldValue]',
+  selector: 'image-field',
   templateUrl: './image-field.component.html',
   styleUrls: ['./image-field.component.css', '../forms-commom.css'],
 })
@@ -12,11 +12,8 @@ export class ImageFieldComponent extends AbstractField<Image> {
 
   imageLoadingAfterPick: boolean = false;
 
-  @ViewChild('imagePicker') imagePicker!: ElementRef;
-
   onRemove(): void {
-    this.imagePicker.nativeElement.value = '';
-    this.fieldValue!.src = '';
+    super.onChange(undefined);
   }
 
   onFilePick(fileInput: any): boolean {
@@ -43,7 +40,11 @@ export class ImageFieldComponent extends AbstractField<Image> {
   }
 
   updateImage(src: string): void {
-    this.fieldValue!.src = src;
+    if (this.fieldValue) {
+      this.fieldValue.src = src;
+    } else {
+      this.onChange({ src: src });
+    }
     this.imageLoadingAfterPick = false;
   }
 }

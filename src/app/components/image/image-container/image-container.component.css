@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.image-container img.image-main {
+.image-container > img.image-main {
   height: 100%;
   width: 100%;
   object-fit: contain;
@@ -21,7 +21,7 @@
   z-index: 2;
 }
 
-.image-container img.image-background {
+.image-container > img.image-background {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -29,12 +29,4 @@
   z-index: 1;
   filter: blur(calc(var(--font-size) * 1.5)) grayscale(0.1);
   transform: scale(1.25);
-}
-
-.label {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 100%;
-  background-color: var(--body-bg);
-  z-index: 3;
 }

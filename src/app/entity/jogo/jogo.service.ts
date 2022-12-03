@@ -1,19 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Constants } from 'src/app/helper/constants';
 import { MockHelper } from 'src/app/helper/mock-helper';
-import { Utils } from 'src/app/helper/utils';
 import { BaseEntityService } from '../base-entity-service';
-import { Jogo } from './jogo';
+import { ActionImage, Image } from '../image/image';
+import { ImageService } from '../image/image.service';
+import { Jogo, Jogos } from './jogo';
 
 @Injectable({ providedIn: 'root' })
-export class JogoService extends BaseEntityService<Jogo> {
+export class JogoService extends BaseEntityService<Jogo, number> {
   get localStorageKey(): string {
     return 'jogoDatabase';
-  }
-
-  get jsonServerEntity(): string {
-    return 'jogos';
   }
 
   get useMocks(): boolean {
@@ -24,29 +21,42 @@ export class JogoService extends BaseEntityService<Jogo> {
     return Constants.jogosLocalStorage;
   }
 
-  constructor(protected override httpClient: HttpClient) {
-    super(httpClient);
+  constructor(private imageService: ImageService) {
+    super();
+  }
+
+  protected override postProcessResult(jogo: Jogo): void {
+    this.imageService.getById(jogo.id!).subscribe((image) => {
+      if (image) {
+        let actionImage = ActionImage.fromImage(image, `/jogos/${jogo.id}`);
+        jogo.imagem = actionImage;
+      }
+    });
   }
 
   public newEmpty(): Jogo {
     return new Jogo();
   }
 
-  public copyClean(object: Jogo): Jogo {
-    return new Jogo(
-      object.id,
-      object.titulo,
-      object.genero,
-      object.plataforma,
-      object.desenvolvedora,
-      object.publicadora,
-      object.precisaReparos,
-      object.emprestado,
-      object.serial,
-      object.prateleiraId,
-      object.detalhes,
-      object.imagemId
-    );
+  protected override saveLocalStorage(jogo: Jogo): number {
+    let imagem: Image | undefined = jogo.imagem;
+    jogo.imagem = undefined;
+
+    let id = super.saveLocalStorage(jogo);
+
+    if (imagem) {
+      imagem.id = id;
+      this.imageService.save(imagem);
+    } else {
+      this.imageService.remove(id);
+    }
+
+    return id;
+  }
+
+  protected override removeLocalStorage(id: number): boolean {
+    this.imageService.remove(id);
+    return super.removeLocalStorage(id);
   }
 
   protected generateMock(): Jogo {
@@ -55,9 +65,11 @@ export class JogoService extends BaseEntityService<Jogo> {
 }
 
 class JogoMock extends Jogo {
+  private static counter: number = 1;
+
   constructor() {
     super(
-      Utils.generateEntityId(),
+      JogoMock.counter++,
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),

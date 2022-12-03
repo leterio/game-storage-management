@@ -1,21 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/helper/constants';
 import { MockHelper } from 'src/app/helper/mock-helper';
-import { Utils } from 'src/app/helper/utils';
 import { BaseEntityService } from '../base-entity-service';
 import { Image } from './image';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImageService extends BaseEntityService<Image> {
+export class ImageService extends BaseEntityService<Image, number> {
   get localStorageKey(): string {
     return 'imageDatabase';
-  }
-
-  get jsonServerEntity(): string {
-    return 'images';
   }
 
   get useMocks(): boolean {
@@ -26,16 +20,8 @@ export class ImageService extends BaseEntityService<Image> {
     return Constants.imageLocalStorage;
   }
 
-  constructor(protected override httpClient: HttpClient) {
-    super(httpClient);
-  }
-
   public newEmpty(): Image {
     return new Image();
-  }
-
-  public copyClean(object: Image): Image {
-    return new Image(object.id, object.src);
   }
 
   protected generateMock(): Image {
@@ -44,8 +30,10 @@ export class ImageService extends BaseEntityService<Image> {
 }
 
 class ImageMock extends Image {
+  private static counter: number = 1;
+
   constructor() {
-    super(Utils.generateEntityId(), ImageMock.generatePlaceholder());
+    super(ImageMock.counter++, ImageMock.generatePlaceholder());
   }
 
   private static generatePlaceholder(): string {
