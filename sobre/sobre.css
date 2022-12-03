@@ -1,0 +1,13 @@
+#content {
+  padding: 75px;
+  text-align: center;
+}
+.sobre-content {
+  padding-top: 25px;
+}
+.sobre-content > p {
+  padding: 25px;
+}
+.sobre-developed-by {
+  padding-top: 75px;
+}

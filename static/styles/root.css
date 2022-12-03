@@ -1,0 +1,30 @@
+@import url(layout.css);
+@import url(components.css);
+
+@font-face {
+  font-family: "Roboto";
+  src: url(/static/fonts/Roboto-Regular.ttf) format("truetype");
+}
+
+:root {
+  --font-family: "Roboto";
+  --font-size: 1rem;
+}
+
+.wireframe * {
+  outline: inset 1px red !important;
+}
+
+.dark-theme {
+  --font-color: #eee;
+  --body-bg: #222;
+  --header-bg: #444;
+  --header-menu-bg: #393939;
+
+  /* Components */
+  --detailed-list-item-bg: #2e2e2e;
+
+  /* Forms */
+  --field-bg: #333;
+  --field-focus-box-shadow-color: #444;
+}
