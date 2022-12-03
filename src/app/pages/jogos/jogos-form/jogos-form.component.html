@@ -100,8 +100,7 @@
             fieldId="cadastro-prateleira"
             fieldName="prateleira"
             fieldLabel="Prateleira"
-            [(fieldValue)]="jogo.prateleira"
-            [fieldOptions]="prateleiraOptions"
+            [fieldRequired]="true"
             [fieldReadOnly]="!editMode"
           ></drop-down-field>
         </div>
@@ -120,6 +119,7 @@
       </div>
     </div>
   </div>
+  <!-- {{ jogo | json }} -->
   <div class="row py-2">
     <div class="col">
       <div class="text-center">

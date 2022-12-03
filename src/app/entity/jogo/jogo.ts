@@ -1,3 +1,5 @@
+import { Image } from '../image/image';
+
 export declare type Jogos = Jogo[];
 export class Jogo {
   constructor(
@@ -10,8 +12,8 @@ export class Jogo {
     public precisaReparos: boolean = false,
     public emprestado: boolean = false,
     public serial: string = '',
-    public prateleira: string = '',
+    public prateleiraId: any = undefined,
     public detalhes: string = '',
-    public imagem: string = ''
+    public imagemId: string = ''
   ) {}
 }

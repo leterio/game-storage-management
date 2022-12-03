@@ -43,9 +43,9 @@ export class JogoService extends BaseEntityService<Jogo> {
       object.precisaReparos,
       object.emprestado,
       object.serial,
-      object.prateleira,
+      object.prateleiraId,
       object.detalhes,
-      object.imagem
+      object.imagemId
     );
   }
 

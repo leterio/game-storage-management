@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, of, throwError } from 'rxjs';
-import { Constants } from '../helper/constants';
 import { Utils } from '../helper/utils';
 
 export abstract class BaseEntityService<T> {
@@ -11,16 +10,15 @@ export abstract class BaseEntityService<T> {
 
   constructor(protected httpClient: HttpClient) {}
 
-  public list(total?: number, currentPage?: number): Observable<T[]> {
-    if (total && total <= 0) return of([]);
+  public list(total: number, currentPage?: number): Observable<T[]> {
+    if (total <= 0) return of([]);
 
     let observableResults: Observable<T[]>;
     if (this.useMocks) {
       if (total == 1) observableResults = of([this.generateMock()]);
       else {
-        let _total: number = total ? total : 10;
         let mockedResults: T[] = [];
-        for (let i = 0; i < _total; i++) {
+        for (let i = 0; i < total; i++) {
           mockedResults.push(this.generateMock());
         }
         observableResults = of(mockedResults);
@@ -59,7 +57,7 @@ export abstract class BaseEntityService<T> {
   }
 
   private listJsonServer(total?: Number, currentPage?: number): Observable<T[]> {
-    return this.httpClient.get<T[]>(`${Constants.jsonServerBaseUrl}/${this.jsonServerEntity}`);
+    return this.httpClient.get<T[]>(`http://localhost:3000/${this.jsonServerEntity}`);
   }
 
   public getById(id: string): Observable<T | undefined> {
@@ -89,7 +87,7 @@ export abstract class BaseEntityService<T> {
   }
 
   private getByIdJsonServer(id: string): Observable<T | undefined> {
-    return this.httpClient.get<T | undefined>(`${Constants.jsonServerBaseUrl}/${this.jsonServerEntity}/${id}`);
+    return this.httpClient.get<T | undefined>(`http://localhost:3000/${this.jsonServerEntity}/${id}`);
   }
 
   public save(object: T): Observable<string> {
@@ -125,10 +123,10 @@ export abstract class BaseEntityService<T> {
 
     if (!(<any>object).id) {
       (<any>object).id = Utils.generateEntityId();
-      operationResult = this.httpClient.post(`${Constants.jsonServerBaseUrl}/${this.jsonServerEntity}`, this.copyClean(object));
+      operationResult = this.httpClient.post(`http://localhost:3000/${this.jsonServerEntity}`, this.copyClean(object));
     } else {
       operationResult = this.httpClient.put(
-        `${Constants.jsonServerBaseUrl}/${this.jsonServerEntity}/${(<any>object).id}`,
+        `http://localhost:3000/${this.jsonServerEntity}/${(<any>object).id}`,
         object
       );
     }
@@ -159,8 +157,7 @@ export abstract class BaseEntityService<T> {
   }
 
   private removeJsonServer(id: string): Observable<void> {
-    console.log(`Delete: ${id}`);
-    return this.httpClient.delete(`${Constants.jsonServerBaseUrl}/${this.jsonServerEntity}/${id}`).pipe(
+    return this.httpClient.delete(`http://localhost:3000/${this.jsonServerEntity}/${id}`).pipe(
       map(() => {
         return;
       })

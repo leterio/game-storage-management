@@ -43,6 +43,8 @@ h1 {
 }
 
 .btn-new {
+  max-height: 3em;
+  max-width: 3em;
   height: calc(1.375em + 2.25vw);
   width: calc(1.375em + 2.25vw);
   position: absolute;
