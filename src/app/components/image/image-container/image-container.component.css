@@ -27,7 +27,7 @@
   object-fit: cover;
   position: absolute;
   z-index: 1;
-  filter: blur(calc(var(--font-size) * 1.5)) grayscale(0.1);
+  filter: blur(calc(var(--font-size) * 0.5)) grayscale(0.75);
   transform: scale(1.25);
 }
 

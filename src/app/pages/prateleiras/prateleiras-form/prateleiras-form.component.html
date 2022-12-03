@@ -8,10 +8,10 @@
       <div class="row my-2" *ngIf="editMode">
         <div class="col">
           <text-field
-            fieldId="cadastro-titulo"
-            fieldName="titulo"
-            fieldLabel="Título"
-            [(fieldValue)]="jogo.titulo"
+            fieldId="cadastro-nome"
+            fieldName="nome"
+            fieldLabel="Nome"
+            [(fieldValue)]="prateleira.nome"
             [fieldReadOnly]="!editMode"
             [fieldRequired]="true"
             fieldPattern=".{3,}"
@@ -22,41 +22,19 @@
       <div class="row my-2">
         <div class="col-sm-12 col-md-6">
           <text-field
-            fieldId="cadastro-genero"
-            fieldName="genero"
-            fieldLabel="Gênero"
-            [(fieldValue)]="jogo.genero"
+            fieldId="cadastro-modelo"
+            fieldName="modelo"
+            fieldLabel="Modelo"
+            [(fieldValue)]="prateleira.modelo"
             [fieldReadOnly]="!editMode"
           ></text-field>
         </div>
         <div class="col-sm-12 col-md-6">
           <text-field
-            fieldId="cadastro-plataforma"
-            fieldName="plataforma"
-            fieldLabel="Plataforma"
-            [(fieldValue)]="jogo.plataforma"
-            [fieldReadOnly]="!editMode"
-            [fieldRequired]="true"
-            fieldPattern=".{1,}"
-          ></text-field>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col">
-          <text-field
-            fieldId="cadastro-desenvolvedora"
-            fieldName="desenvolvedora"
-            fieldLabel="Desenvolvedora"
-            [(fieldValue)]="jogo.desenvolvedora"
-            [fieldReadOnly]="!editMode"
-          ></text-field>
-        </div>
-        <div class="col">
-          <text-field
-            fieldId="cadastro-publicadora"
-            fieldName="publicadora"
-            fieldLabel="Publicadora"
-            [(fieldValue)]="jogo.publicadora"
+            fieldId="cadastro-dimensoes"
+            fieldName="dimensoes"
+            fieldLabel="Dimensões"
+            [(fieldValue)]="prateleira.dimensoes"
             [fieldReadOnly]="!editMode"
           ></text-field>
         </div>
@@ -69,16 +47,16 @@
                 fieldId="precisa_reparos"
                 fieldName="precisa_reparos"
                 fieldLabel="Precisa de Reparos"
-                [(fieldValue)]="jogo.precisaReparos"
+                [(fieldValue)]="prateleira.precisaReparos"
                 [fieldReadOnly]="!editMode"
               ></check-field>
             </div>
             <div class="col-6 my-2">
               <check-field
-                fieldId="emprestado"
-                fieldName="emprestado"
-                fieldLabel="Emprestado"
-                [(fieldValue)]="jogo.emprestado"
+                fieldId="descomissionada"
+                fieldName="descomissionada"
+                fieldLabel="Descomissionada"
+                [(fieldValue)]="prateleira.descomissionada"
                 [fieldReadOnly]="!editMode"
               ></check-field>
             </div>
@@ -86,24 +64,12 @@
         </div>
         <div class="col-sm-12 col-xl-6">
           <text-field
-            fieldId="cadastro-serial"
-            fieldName="serial"
-            fieldLabel="Serial"
-            [(fieldValue)]="jogo.serial"
+            fieldId="cadastro-capacidade"
+            fieldName="capacidade"
+            fieldLabel="Capacidade"
+            [(fieldValue)]="prateleira.capacidade"
             [fieldReadOnly]="!editMode"
           ></text-field>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col">
-          <drop-down-field
-            fieldId="cadastro-prateleira"
-            fieldName="prateleira"
-            fieldLabel="Prateleira"
-            [(fieldValue)]="jogo.prateleira"
-            [fieldOptions]="prateleiraOptions"
-            [fieldReadOnly]="!editMode"
-          ></drop-down-field>
         </div>
       </div>
       <div class="row my-2">
@@ -113,7 +79,7 @@
             fieldName="detalhes"
             fieldLabel="Detalhes / Notas"
             [fieldRows]="5"
-            [(fieldValue)]="jogo.detalhes"
+            [(fieldValue)]="prateleira.detalhes"
             [fieldReadOnly]="!editMode"
           ></text-area-field>
         </div>

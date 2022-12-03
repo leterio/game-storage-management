@@ -33,3 +33,12 @@
 .navbar-menu {
   background-color: var(--header-menu-bg);
 }
+
+.nav-item {
+  /* background-color: var(--data-grid-item-bg); */
+  cursor: pointer;
+  transition: box-shadow 0.15s ease-in-out;
+}
+.nav-item:hover {
+  box-shadow: var(--grid-box-shadow);
+}

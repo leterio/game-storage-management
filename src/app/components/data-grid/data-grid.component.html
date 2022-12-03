@@ -20,16 +20,16 @@
           <div class="col data-grid-item-fields">
             <div class="container">
               <div *ngIf="model.field1 || model.field2" class="row mt-1">
-                <div *ngIf="model.field1 && field1Label" class="col-5 col-lg-2">Plataforma:</div>
-                <div *ngIf="model.field1" class="col-7 col-lg-4">{{ model.field1 }}</div>
-                <div *ngIf="model.field2 && field2Label" class="col-5 col-lg-2">Gênero:</div>
-                <div *ngIf="model.field2" class="col-7 col-lg-4">{{ model.field2 }}</div>
+                <div *ngIf="field1Label" class="col-5 col-lg-2">{{ field1Label }}:</div>
+                <div *ngIf="field1Label" class="col-7 col-lg-4">{{ model.field1 }}</div>
+                <div *ngIf="field2Label" class="col-5 col-lg-2">{{ field2Label }}:</div>
+                <div *ngIf="field2Label" class="col-7 col-lg-4">{{ model.field2 }}</div>
               </div>
               <div class="row mt-1">
-                <div *ngIf="model.field3 && field3Label" class="col-5 col-lg-2">Serial:</div>
-                <div *ngIf="model.field3" class="col-7 col-lg-4">{{ model.field3 }}</div>
-                <div *ngIf="model.field4 && field4Label" class="col-5 col-lg-2">Prateleira:</div>
-                <div *ngIf="model.field4" class="col-7 col-lg-4">{{ model.field4 }}</div>
+                <div *ngIf="field3Label" class="col-5 col-lg-2">{{ field3Label }}:</div>
+                <div *ngIf="field3Label" class="col-7 col-lg-4">{{ model.field3 }}</div>
+                <div *ngIf="field4Label" class="col-5 col-lg-2">{{ field4Label }}:</div>
+                <div *ngIf="field4Label" class="col-7 col-lg-4">{{ model.field4 }}</div>
               </div>
             </div>
           </div>

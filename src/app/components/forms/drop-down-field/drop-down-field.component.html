@@ -1,5 +1,17 @@
 <div class="form-group">
   <label for="cadastro-prateleira">* Prateleira</label>
   <!-- <input class="form-control" type="text" id="cadastro-prateleira" name="prateleira" /> -->
-  <span class="form-control">WIP</span>
+  <select
+    #thisInput
+    id="{{ fieldId }}"
+    name="{{ fieldName }}"
+    class="form-select"
+    [ngModel]="fieldValue"
+    (ngModelChange)="onChange($event)"
+    [disabled]="fieldReadOnly"
+    (blur)="onBlur($event)"
+  >
+    <option selected [ngValue]="''">-- Selecione --</option>
+    <option *ngFor="let option of fieldOptions" [ngValue]="option.id">{{ option.label }}</option>
+  </select>
 </div>
