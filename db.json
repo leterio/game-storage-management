@@ -1,18 +1,131 @@
 {
   "jogos": [
     {
-      "id": "22ee5dcf-59b9-41db-a67d-ba6c3964db93",
-      "titulo": "Um jogo qualquer",
-      "genero": "Gênero do jogo qualquer",
-      "plataforma": "Plataforma do jogo qualquer",
-      "desenvolvedora": "Desenvolvedora do jogo qualquer",
-      "publicadora": "Publicadora do jogo qualquer",
+      "id": "a2bb68d4-8c23-4bd3-ba07-6d13ed37e3e6",
+      "titulo": "CTR - Crash Team Racing",
+      "genero": "Corrida",
+      "plataforma": "PlayStation",
+      "desenvolvedora": "Naughty Dog",
+      "publicadora": "Sony Computer Entertainment",
+      "precisaReparos": false,
+      "emprestado": false,
+      "serial": "SCUS-94426",
+      "prateleira": "1890eaea-f28f-44bd-93fd-a2aa4f4f00b5",
+      "detalhes": "",
+      "imagem": "6c3aae28-ec11-45a4-9295-2d11ff133061"
+    },
+    {
+      "id": "ef928d3d-c348-4bb3-88e2-74dc960f0d14",
+      "titulo": "Crash Bandicoot",
+      "genero": "Plataforma",
+      "plataforma": "PlayStation",
+      "desenvolvedora": "Naughty Dog",
+      "publicadora": "Sony Computer Entertainment",
+      "precisaReparos": false,
+      "emprestado": false,
+      "serial": "SCES-00344",
+      "prateleira": "",
+      "detalhes": "",
+      "imagem": "12b0f4c9-cd93-4c7d-a726-6936dfe68296"
+    },
+    {
+      "id": "b6f51885-8c71-491a-a13b-3aebf3eab705",
+      "titulo": "Super Mario World",
+      "genero": "Plataforma",
+      "plataforma": "Super Nintendo (SNES)",
+      "desenvolvedora": "Nintendo",
+      "publicadora": "Nintendo",
       "precisaReparos": true,
-      "emprestado": true,
-      "serial": "Serial do jogo qualquer",
-      "detalhes": "Detalhes / Notas do jogo qualquer",
-      "imagemId": "2d6f1fcb-eee8-4ad1-9dfd-0a0a4b2f0599"
+      "emprestado": false,
+      "serial": "",
+      "prateleira": "",
+      "detalhes": "Cartucho com corrosão por oxidação",
+      "imagem": "0366dd09-a2e4-4ba3-bc44-9fcc1ba7389a"
+    },
+    {
+      "id": "43a7ceb4-eff7-4a3f-be25-4ac2ecab5346",
+      "titulo": "Black",
+      "genero": "Tiro em Primeira Pessoa",
+      "plataforma": "PlayStation 2",
+      "desenvolvedora": "Criterion Games",
+      "publicadora": "Electronic Arts",
+      "precisaReparos": false,
+      "emprestado": false,
+      "serial": "SLES-54030",
+      "prateleira": "",
+      "detalhes": "",
+      "imagem": "0b73926c-5410-46e9-8cb2-103a1e5bf1b4"
     }
   ],
-  "images": []
+  "plataformas": [
+    {
+      "id": "6d0e5665-7172-431b-8045-55e38aec761c",
+      "nome": "Atari 2600",
+      "marca": "Atari",
+      "modelo": "2600",
+      "serial": "",
+      "precisaReparos": true,
+      "emprestado": false,
+      "desbloqueio": "",
+      "regiao": "",
+      "detalhes": "Sinal de vídeo destorcido.",
+      "imagem": "a3931c56-f4dd-417f-8617-56589fb1e9dd"
+    },
+    {
+      "id": "17415c0b-b1e3-4b87-98c0-c3f836d5abbe",
+      "nome": "PlayStation 2",
+      "marca": "Sony",
+      "modelo": "PlayStation 2",
+      "serial": "SCPH-90006",
+      "precisaReparos": true,
+      "emprestado": false,
+      "desbloqueio": "Matrix Infinity",
+      "regiao": "Europa",
+      "detalhes": "Canhão apresentando falhas",
+      "imagem": "bd5be5bd-9908-4247-b851-38747386db39"
+    }
+  ],
+  "prateleiras": [
+    {
+      "id": "1890eaea-f28f-44bd-93fd-a2aa4f4f00b5",
+      "nome": "Estante de Livros",
+      "modelo": "",
+      "dimensoes": "",
+      "capacidade": "",
+      "precisaReparos": false,
+      "descomissionada": false,
+      "detalhes": "",
+      "imagem": "4f72cb02-b8d9-4b69-be24-db23e41faffd"
+    }
+  ],
+  "images": [
+    {
+      "id": "6c3aae28-ec11-45a4-9295-2d11ff133061",
+      "src": "https://archive.org/download/ctr-crash-team-racing-usa/CTR%20Cover.png"
+    },
+    {
+      "id": "12b0f4c9-cd93-4c7d-a726-6936dfe68296",
+      "src": "https://archive.org/download/crash-bandicoot-usa/Crash_Bandicoot_1_PS1_Box_Art.png"
+    },
+    {
+      "id": "0366dd09-a2e4-4ba3-bc44-9fcc1ba7389a",
+      "src": "https://upload.wikimedia.org/wikipedia/pt/thumb/0/06/Super-Mario-World.jpg/270px-Super-Mario-World.jpg"
+    },
+    {
+      "id": "0b73926c-5410-46e9-8cb2-103a1e5bf1b4",
+      "src": "https://upload.wikimedia.org/wikipedia/pt/a/ad/Black_cover_art.jpg"
+    },
+    {
+      "id": "4f72cb02-b8d9-4b69-be24-db23e41faffd",
+      "src": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=320&dpr=1"
+    },
+    {
+      "id": "a3931c56-f4dd-417f-8617-56589fb1e9dd",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Atari2600wood4.jpg"
+    },
+    {
+      "id": "bd5be5bd-9908-4247-b851-38747386db39",
+      "src": "https://images.unsplash.com/photo-1591196702597-062a87208fed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=640&q=70"
+    }
+  ]
 }

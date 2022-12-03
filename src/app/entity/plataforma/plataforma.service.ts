@@ -4,57 +4,56 @@ import { Constants } from 'src/app/helper/constants';
 import { MockHelper } from 'src/app/helper/mock-helper';
 import { Utils } from 'src/app/helper/utils';
 import { BaseEntityService } from '../base-entity-service';
-import { Jogo } from './jogo';
+import { Plataforma } from './plataforma';
 
 @Injectable({ providedIn: 'root' })
-export class JogoService extends BaseEntityService<Jogo> {
+export class PlataformaService extends BaseEntityService<Plataforma> {
   get localStorageKey(): string {
-    return 'jogoDatabase';
+    return 'plataformaDatabase';
   }
 
   get jsonServerEntity(): string {
-    return 'jogos';
+    return 'plataformas';
   }
 
   get useMocks(): boolean {
-    return Constants.jogosMocked;
+    return Constants.plataformasMocked;
   }
 
   get useLocalStorage(): boolean {
-    return Constants.jogosLocalStorage;
+    return Constants.plataformasLocalStorage;
   }
 
   constructor(protected override httpClient: HttpClient) {
     super(httpClient);
   }
 
-  public newEmpty(): Jogo {
-    return new Jogo();
+  public newEmpty(): Plataforma {
+    return new Plataforma();
   }
 
-  public copyClean(object: Jogo): Jogo {
-    return new Jogo(
+  public copyClean(object: Plataforma): Plataforma {
+    return new Plataforma(
       object.id,
-      object.titulo,
-      object.genero,
-      object.plataforma,
-      object.desenvolvedora,
-      object.publicadora,
+      object.nome,
+      object.marca,
+      object.modelo,
+      object.serial,
       object.precisaReparos,
       object.emprestado,
-      object.serial,
-      object.prateleira,
+      object.desbloqueio,
+      object.regiao,
       object.detalhes,
       object.imagem
     );
   }
 
-  protected generateMock(): Jogo {
-    return new JogoMock();
+  protected generateMock(): Plataforma {
+    return new PlataformaMock();
   }
 }
 
-class JogoMock extends Jogo {
+class PlataformaMock extends Plataforma {
   constructor() {
     super(
       Utils.generateEntityId(),
@@ -62,11 +61,11 @@ class JogoMock extends Jogo {
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),
-      MockHelper.getWords(1, 5),
       false,
       false,
       MockHelper.getWords(1, 5),
-      undefined,
+      MockHelper.getWords(1, 5),
+      MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5)
     );
   }

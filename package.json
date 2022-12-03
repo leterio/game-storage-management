@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "json:server": "json-server --watch db.json --routes routes.json"
+    "json:server": "json-server --watch db.json --routes routes.json",
+    "build:prod": "ng build --configuration=production --base-href=\"/game-storage-management/\"",
+    "deploy:gh-pages": "npx -- angular-cli-ghpages -S --dir=dist/game-storage-management --repo=https://github.com/leterio/game-storage-management.git",
+    "deploy": "npm run build:prod; npm run deploy:gh-pages"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +32,7 @@
     "@angular/compiler-cli": "^15.0.0",
     "@types/jasmine": "~4.3.0",
     "@types/uuid": "^9.0.0",
+    "angular-cli-ghpages": "^1.0.5",
     "jasmine-core": "~4.5.0",
     "json-server": "^0.17.1",
     "karma": "~6.4.0",

@@ -4,57 +4,54 @@ import { Constants } from 'src/app/helper/constants';
 import { MockHelper } from 'src/app/helper/mock-helper';
 import { Utils } from 'src/app/helper/utils';
 import { BaseEntityService } from '../base-entity-service';
-import { Jogo } from './jogo';
+import { Prateleira } from './prateleira';
 
 @Injectable({ providedIn: 'root' })
-export class JogoService extends BaseEntityService<Jogo> {
+export class PrateleiraService extends BaseEntityService<Prateleira> {
   get localStorageKey(): string {
-    return 'jogoDatabase';
+    return 'prateleiraDatabase';
   }
 
   get jsonServerEntity(): string {
-    return 'jogos';
+    return 'prateleiras';
   }
 
   get useMocks(): boolean {
-    return Constants.jogosMocked;
+    return Constants.prateleirasMocked;
   }
 
   get useLocalStorage(): boolean {
-    return Constants.jogosLocalStorage;
+    return Constants.prateleirasLocalStorage;
   }
 
   constructor(protected override httpClient: HttpClient) {
     super(httpClient);
   }
 
-  public newEmpty(): Jogo {
-    return new Jogo();
+  public newEmpty(): Prateleira {
+    return new Prateleira();
   }
 
-  public copyClean(object: Jogo): Jogo {
-    return new Jogo(
+  public copyClean(object: Prateleira): Prateleira {
+    return new Prateleira(
       object.id,
-      object.titulo,
-      object.genero,
-      object.plataforma,
-      object.desenvolvedora,
-      object.publicadora,
+      object.nome,
+      object.modelo,
+      object.dimensoes,
+      object.capacidade,
       object.precisaReparos,
-      object.emprestado,
-      object.serial,
-      object.prateleira,
+      object.descomissionada,
       object.detalhes,
       object.imagem
     );
   }
 
-  protected generateMock(): Jogo {
-    return new JogoMock();
+  protected generateMock(): Prateleira {
+    return new PrateleiraMock();
   }
 }
 
-class JogoMock extends Jogo {
+class PrateleiraMock extends Prateleira {
   constructor() {
     super(
       Utils.generateEntityId(),
@@ -62,12 +59,10 @@ class JogoMock extends Jogo {
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),
       MockHelper.getWords(1, 5),
-      MockHelper.getWords(1, 5),
       false,
       false,
       MockHelper.getWords(1, 5),
-      undefined,
-      MockHelper.getWords(1, 5)
+      undefined
     );
   }
 }

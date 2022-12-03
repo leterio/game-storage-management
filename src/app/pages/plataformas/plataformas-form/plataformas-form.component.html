@@ -8,10 +8,10 @@
       <div class="row my-2" *ngIf="editMode">
         <div class="col">
           <text-field
-            fieldId="cadastro-titulo"
-            fieldName="titulo"
-            fieldLabel="Título"
-            [(fieldValue)]="jogo.titulo"
+            fieldId="cadastro-nome"
+            fieldName="nome"
+            fieldLabel="Nome"
+            [(fieldValue)]="plataforma.nome"
             [fieldReadOnly]="!editMode"
             [fieldRequired]="true"
             fieldPattern=".{3,}"
@@ -22,41 +22,19 @@
       <div class="row my-2">
         <div class="col-sm-12 col-md-6">
           <text-field
-            fieldId="cadastro-genero"
-            fieldName="genero"
-            fieldLabel="Gênero"
-            [(fieldValue)]="jogo.genero"
+            fieldId="cadastro-marca"
+            fieldName="marca"
+            fieldLabel="Marca"
+            [(fieldValue)]="plataforma.marca"
             [fieldReadOnly]="!editMode"
           ></text-field>
         </div>
         <div class="col-sm-12 col-md-6">
           <text-field
-            fieldId="cadastro-plataforma"
-            fieldName="plataforma"
-            fieldLabel="Plataforma"
-            [(fieldValue)]="jogo.plataforma"
-            [fieldReadOnly]="!editMode"
-            [fieldRequired]="true"
-            fieldPattern=".{1,}"
-          ></text-field>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col">
-          <text-field
-            fieldId="cadastro-desenvolvedora"
-            fieldName="desenvolvedora"
-            fieldLabel="Desenvolvedora"
-            [(fieldValue)]="jogo.desenvolvedora"
-            [fieldReadOnly]="!editMode"
-          ></text-field>
-        </div>
-        <div class="col">
-          <text-field
-            fieldId="cadastro-publicadora"
-            fieldName="publicadora"
-            fieldLabel="Publicadora"
-            [(fieldValue)]="jogo.publicadora"
+            fieldId="cadastro-modelo"
+            fieldName="modelo"
+            fieldLabel="Modelo"
+            [(fieldValue)]="plataforma.modelo"
             [fieldReadOnly]="!editMode"
           ></text-field>
         </div>
@@ -69,7 +47,7 @@
                 fieldId="precisa_reparos"
                 fieldName="precisa_reparos"
                 fieldLabel="Precisa de Reparos"
-                [(fieldValue)]="jogo.precisaReparos"
+                [(fieldValue)]="plataforma.precisaReparos"
                 [fieldReadOnly]="!editMode"
               ></check-field>
             </div>
@@ -78,7 +56,7 @@
                 fieldId="emprestado"
                 fieldName="emprestado"
                 fieldLabel="Emprestado"
-                [(fieldValue)]="jogo.emprestado"
+                [(fieldValue)]="plataforma.emprestado"
                 [fieldReadOnly]="!editMode"
               ></check-field>
             </div>
@@ -89,21 +67,29 @@
             fieldId="cadastro-serial"
             fieldName="serial"
             fieldLabel="Serial"
-            [(fieldValue)]="jogo.serial"
+            [(fieldValue)]="plataforma.serial"
             [fieldReadOnly]="!editMode"
           ></text-field>
         </div>
       </div>
       <div class="row my-2">
-        <div class="col">
-          <drop-down-field
-            fieldId="cadastro-prateleira"
-            fieldName="prateleira"
-            fieldLabel="Prateleira"
-            [(fieldValue)]="jogo.prateleira"
-            [fieldOptions]="prateleiraOptions"
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-desbloqueio"
+            fieldName="desbloqueio"
+            fieldLabel="Desbloqueio"
+            [(fieldValue)]="plataforma.desbloqueio"
             [fieldReadOnly]="!editMode"
-          ></drop-down-field>
+          ></text-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-regiao"
+            fieldName="regiao"
+            fieldLabel="Região"
+            [(fieldValue)]="plataforma.regiao"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
         </div>
       </div>
       <div class="row my-2">
@@ -113,7 +99,7 @@
             fieldName="detalhes"
             fieldLabel="Detalhes / Notas"
             [fieldRows]="5"
-            [(fieldValue)]="jogo.detalhes"
+            [(fieldValue)]="plataforma.detalhes"
             [fieldReadOnly]="!editMode"
           ></text-area-field>
         </div>

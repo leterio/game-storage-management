@@ -1,7 +1,8 @@
 .form-control,
 .form-control:focus,
 .form-check-input,
-.form-check-input:checked {
+.form-check-input:checked,
+.form-select {
   font-size: var(--font-size);
   background-color: var(--field-bg);
   color: var(--font-color);
@@ -11,10 +12,15 @@
 .form-control:focus:not(.is-invalid),
 .form-control:hover:not(.is-invalid),
 .form-check-input:focus,
-.form-check-input:hover {
+.form-check-input:hover,
+.form-select:focus {
   box-shadow: var(--field-box-shadow);
 }
 
 .form-control.is-invalid {
   box-shadow: var(--default-box-shadow-configuration) var(--field-error-box-shadow-color);
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23eeeeee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
 }
