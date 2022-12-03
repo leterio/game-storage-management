@@ -9,9 +9,4 @@ export class Utils {
       return undefined;
     }
   }
-
-  public static valueOrDefault<T>(value: T | undefined, _default: T): T {
-    if (value) return value;
-    else return _default;
-  }
 }

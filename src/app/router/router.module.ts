@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { RouterModule as AngularRouterModule, Routes, TitleStrategy as AngularTitleStrategy } from '@angular/router';
+
 import { HomeComponent } from '../pages/home/home.component';
 import { JogosFormComponent } from '../pages/jogos/jogos-form/jogos-form.component';
 import { JogosHomeComponent } from '../pages/jogos/jogos-home/jogos-home.component';

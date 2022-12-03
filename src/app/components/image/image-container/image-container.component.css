@@ -9,10 +9,6 @@
   overflow: hidden;
 }
 
-.image-container.has-action {
-  cursor: pointer;
-}
-
 .image-container > img.image-main {
   height: 100%;
   width: 100%;

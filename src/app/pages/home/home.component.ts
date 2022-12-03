@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Images } from 'src/app/entity/image/image';
 import { Jogos } from 'src/app/entity/jogo/jogo';
-import { JogoService } from 'src/app/entity/jogo/jogo.service';
+import { JogoService } from 'src/app/entity/jogo/jogo-service';
 
 @Component({
   selector: 'pages-home',
@@ -12,13 +12,13 @@ export class HomeComponent implements OnInit {
   public jogosNovoRoute: string = '/jogos/novo';
 
   public jogosImageArray: Images = [];
-  // public plataformasImageArray: Images = [];
+  public plataformasImageArray: Images = [];
 
   constructor(private jogoService: JogoService) {}
 
   ngOnInit(): void {
     this.loadJogosImageArray();
-    // this.loadPlataformasImageArray();
+    this.loadPlataformasImageArray();
   }
 
   private loadJogosImageArray(): void {
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // private loadPlataformasImageArray(): void {
-  //   this.plataformasImageArray = [];
-  // }
+  private loadPlataformasImageArray(): void {
+    this.plataformasImageArray = [];
+  }
 }

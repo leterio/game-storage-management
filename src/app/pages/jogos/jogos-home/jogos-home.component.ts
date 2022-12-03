@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Jogos } from 'src/app/entity/jogo/jogo';
-import { JogoService } from 'src/app/entity/jogo/jogo.service';
+
+import { Jogo, Jogos } from 'src/app/entity/jogo/jogo';
+import { JogoService } from 'src/app/entity/jogo/jogo-service';
 
 @Component({
   selector: 'pages-jogos-home',

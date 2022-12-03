@@ -1,9 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
+
 import { RouterModule } from '../router/router.module';
-import { AppComponent } from './app/app.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { AppComponent } from './app/app.component';
+import { CommonModule } from '@angular/common';
 
 const modules: Array<Type<any>> = [HeaderComponent, FooterComponent, AppComponent];
 

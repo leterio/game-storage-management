@@ -8,4 +8,8 @@ import { AbstractField } from '../abstract-field';
 export class TextAreaFieldComponent extends AbstractField<string> {
   @Input() fieldRows: number = 5;
   @Input() fieldResizable: boolean = true;
+
+  styleResize(): string {
+    return this.fieldResizable ? 'vertical' : 'none';
+  }
 }

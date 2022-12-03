@@ -1,11 +1,12 @@
 import { Image } from '../image/image';
+import { MockHelper } from '../../helper/mock-helper';
 
 export declare type Jogos = Jogo[];
 export class Jogo {
   public imagem?: Image;
 
   constructor(
-    public id?: number,
+    public id: number = 0,
     public titulo: string = '',
     public genero: string = '',
     public plataforma: string = '',
