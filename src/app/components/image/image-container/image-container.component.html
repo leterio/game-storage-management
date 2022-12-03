@@ -9,4 +9,4 @@
     <img class="image-background" src="assets/default-image.png" />
   </div>
 </div>
-<div *ngIf="image?.label" class="label text-center py-2">{{ image?.label }}</div>
+<div *ngIf="image?.label" class="label text-center py-2">{{ image?.label | uppercase }}</div>
