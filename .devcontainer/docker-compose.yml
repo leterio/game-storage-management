@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  game-storage-management-devcontainer:
+    image: viniciusleterio/angular-devcontainer:15.0.0
+    container_name: game-storage-management-devcontainer
+    working_dir: /src
