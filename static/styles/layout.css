@@ -1,0 +1,9 @@
+@import url(layout/navbar.css);
+@import url(layout/forms.css);
+
+body {
+  --bs-body-color: var(--font-color);
+  --bs-body-font-family: var(--font-family);
+  --bs-body-font-size: var(--font-size);
+  --bs-body-bg: var(--body-bg);
+}
