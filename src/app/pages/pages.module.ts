@@ -1,18 +1,13 @@
+import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ImageModule } from '../image/image.module';
+import { HomePageComponent } from './home-page/home-page.component';
 
-import { RouterModule } from '../router/router.module';
-import { ComponentsModule } from '../components/components.module';
-
-import { HomeComponent } from './home/home.component';
-
-import { JogosFormComponent } from './jogos/jogos-form/jogos-form.component';
-import { JogosHomeComponent } from './jogos/jogos-home/jogos-home.component';
-import { JogosRouterComponent } from './jogos/jogos-router/jogos-router.component';
+const modules: Array<Type<any> | any[]> = [HomePageComponent];
 
 @NgModule({
-  declarations: [HomeComponent, JogosHomeComponent, JogosFormComponent, JogosRouterComponent],
-  exports: [HomeComponent],
-  imports: [CommonModule, RouterModule, ComponentsModule],
+  declarations: modules,
+  exports: modules,
+  imports: [CommonModule, ImageModule],
 })
 export class PagesModule {}

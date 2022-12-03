@@ -1,7 +1,0 @@
-:host {
-  --local-image-container-size: calc(var(--font-size) * 20);
-}
-
-:host .btn {
-  --btn-min-width: 8em;
-}
