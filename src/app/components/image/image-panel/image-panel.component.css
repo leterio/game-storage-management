@@ -1,7 +1,0 @@
-.image-panel ::ng-deep .image-container {
-  transition: box-shadow 0.15s ease-in-out;
-}
-
-.image-panel ::ng-deep .image-container:hover {
-  box-shadow: var(--grid-box-shadow);
-}

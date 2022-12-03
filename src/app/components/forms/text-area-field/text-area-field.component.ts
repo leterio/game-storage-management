@@ -4,7 +4,6 @@ import { AbstractField } from '../abstract-field';
 @Component({
   selector: 'text-area-field[fieldId][fieldName][fieldLabel]',
   templateUrl: './text-area-field.component.html',
-  styleUrls: ['../forms-commom.css'],
 })
 export class TextAreaFieldComponent extends AbstractField<string> {
   @Input() fieldRows: number = 5;

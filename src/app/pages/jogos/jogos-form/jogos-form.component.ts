@@ -69,13 +69,9 @@ export class JogosFormComponent implements OnInit {
 
   remove() {
     if (window.confirm(`Deseja realmente remover o jogo "${this.jogo.titulo}?"`)) {
-      this.jogoService.remove(this.jogo.id!).subscribe((success) => {
-        if (success) {
-          window.alert(`Jogo "${this.jogo.titulo}" removido`);
-          this.router.navigate(['/jogos/']);
-        } else {
-          window.alert(`Ocorreu um erro ao remover o jogo "${this.jogo.titulo}"`);
-        }
+      this.jogoService.remove(this.jogo).subscribe((success) => {
+        window.alert(`Jogo "${this.jogo.titulo}" removido`);
+        this.router.navigate(['/jogos/']);
       });
     }
   }

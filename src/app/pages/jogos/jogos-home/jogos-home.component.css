@@ -1,0 +1,26 @@
+:host {
+  --local-image-container-size: 8em;
+}
+
+::ng-deep :root {
+  --detailed-list-item-title-font-size: 1.5em;
+  --detailed-list-item-fields-font-size: 1em;
+}
+
+.detailed-list .image-container {
+  --local-image-container-size: 8em;
+}
+
+.detailed-list-item {
+  position: relative;
+  background-color: var(--detailed-list-item-bg);
+  cursor: pointer;
+}
+
+.detailed-list-item-title {
+  font-size: var(--detailed-list-item-title-font-size);
+}
+
+.detailed-list-item-fields {
+  font-size: var(--detailed-list-item-fields-font-size);
+}

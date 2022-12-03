@@ -1,8 +1,37 @@
 <page-title title="Jogos" routerLinkTarget="novo"></page-title>
-<data-grid
-  [dataGridModels]="jogos"
-  field1Label="Plataforma"
-  field2Label="Gênero"
-  field3Label="Serial"
-  field4Label="Prateleira"
-></data-grid>
+<div class="detailed-list container">
+  <div *ngIf="jogos.length == 0" class="text-center py-5">
+    <span>Nenhum resultado encontrado</span>
+  </div>
+  <div *ngFor="let jogo of jogos" class="row detailed-list-item my-2" [routerLink]="'/jogos/' + jogo.id">
+    <div class="overlay"></div>
+    <div class="col-xl-2 col-lg-3 image-panel g-0">
+      <image-container [image]="jogo.imagem"></image-container>
+    </div>
+    <div class="col-xl-10 col-lg-9 g-0">
+      <div class="container">
+        <div class="row">
+          <div class="col detailed-list-item-title mt-1">{{ jogo.titulo }}</div>
+        </div>
+        <div class="row">
+          <div class="col detailed-list-item-fields">
+            <div class="container">
+              <div class="row mt-1">
+                <div class="col-5 col-lg-2">Plataforma:</div>
+                <div class="col-7 col-lg-4">{{ jogo.plataforma }}</div>
+                <div class="col-5 col-lg-2">Gênero:</div>
+                <div class="col-7 col-lg-4">{{ jogo.genero }}</div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-5 col-lg-2">Serial:</div>
+                <div class="col-7 col-lg-4">{{ jogo.serial }}</div>
+                <div class="col-5 col-lg-2">Prateleira:</div>
+                <div class="col-7 col-lg-4">WIP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
