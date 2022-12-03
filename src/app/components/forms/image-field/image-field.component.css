@@ -1,0 +1,19 @@
+:host {
+  --local-image-container-size: calc(var(--font-size) * 20);
+}
+
+:host .btn {
+  --btn-min-width: 8em;
+}
+
+.image-loading-container {
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 9999;
+}
+
+.image-loading-container .image-loading-message {
+  box-shadow: 0 0 2em 2em var(--bs-body-bg);
+  font-size: calc(var(--font-size) * 2);
+  background: var(--bs-body-bg);
+}

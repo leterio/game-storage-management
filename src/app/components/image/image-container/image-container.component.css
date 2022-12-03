@@ -1,0 +1,40 @@
+::ng-deep :root {
+  --local-image-container-size: 16em;
+}
+
+.image-container {
+  max-width: 100%;
+  height: var(--local-image-container-size);
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container.has-action {
+  cursor: pointer;
+}
+
+.image-container img.image-main {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  position: absolute;
+  z-index: 2;
+}
+
+.image-container img.image-background {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+  filter: blur(calc(var(--font-size) * 0.5)) grayscale(0.75);
+  transform: scale(1.25);
+}
+
+.label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--body-bg);
+  z-index: 3;
+}

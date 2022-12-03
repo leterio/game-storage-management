@@ -1,0 +1,32 @@
+{
+  "name": "GameStorageManagement",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "game-storage-management-devcontainer",
+  "workspaceFolder": "/src",
+  "extensions": ["angular.ng-template", "ritwickdey.LiveServer", "esbenp.prettier-vscode", "EditorConfig.EditorConfig"],
+  "shutdownAction": "stopCompose",
+  "remoteUser": "devel",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.printWidth": 160,
+    "prettier.tabWidth": 2,
+    "prettier.bracketSameLine": true,
+    "prettier.bracketSpacing": true,
+    "prettier.endOfLine": "auto",
+    "prettier.arrowParens": "avoid",
+    "prettier.singleAttributePerLine": false
+  },
+  "mounts": [
+    {
+      "source": "../",
+      "target": "/src",
+      "type": "bind"
+    },
+    {
+      "source": "~/.gitconfig",
+      "target": "/etc/skel/.gitconfig",
+      "type": "bind"
+    }
+  ]
+}

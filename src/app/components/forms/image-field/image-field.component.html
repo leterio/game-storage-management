@@ -1,0 +1,14 @@
+<div class="position-relative">
+  <div class="overlay"></div>
+  <image-container [image]="fieldValue"></image-container>
+  <div *ngIf="imageLoadingAfterPick" class="position-absolute text-center image-loading-container w-100">
+    <span class="image-loading-message p-3">Carregando ...</span>
+  </div>
+</div>
+<div class="py-2" *ngIf="!fieldReadOnly">
+  <div class="text-center">
+    <input #imagePicker class="d-none" type="file" (change)="onFilePick($event)" [accept]="acceptedTypes" />
+    <button class="btn" type="button" (click)="imagePicker.click()" [disabled]="fieldReadOnly">Selecionar</button>
+    <button class="btn" type="button" (click)="onRemove()" [disabled]="fieldReadOnly || fieldEmpty">Remover</button>
+  </div>
+</div>

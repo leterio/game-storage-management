@@ -1,0 +1,40 @@
+<div class="data-grid container">
+  <div *ngIf="dataGridModels.length == 0" class="text-center py-5">
+    <span>Nenhum resultado encontrado</span>
+  </div>
+  <div
+    *ngFor="let model of dataGridModels"
+    class="row data-grid-item position-relative my-2"
+    [routerLink]="model.routerLink"
+  >
+    <div class="overlay"></div>
+    <div class="col-xl-2 col-lg-3 image-panel g-0">
+      <image-container [image]="model.image"></image-container>
+    </div>
+    <div class="col-xl-10 col-lg-9 g-0">
+      <div class="container">
+        <div class="row">
+          <div class="col data-grid-item-title mt-1">{{ model.title | uppercase }}</div>
+        </div>
+        <div class="row">
+          <div class="col data-grid-item-fields">
+            <div class="container">
+              <div *ngIf="model.field1 || model.field2" class="row mt-1">
+                <div *ngIf="field1Label" class="col-5 col-lg-2">{{ field1Label }}:</div>
+                <div *ngIf="field1Label" class="col-7 col-lg-4">{{ model.field1 }}</div>
+                <div *ngIf="field2Label" class="col-5 col-lg-2">{{ field2Label }}:</div>
+                <div *ngIf="field2Label" class="col-7 col-lg-4">{{ model.field2 }}</div>
+              </div>
+              <div class="row mt-1">
+                <div *ngIf="field3Label" class="col-5 col-lg-2">{{ field3Label }}:</div>
+                <div *ngIf="field3Label" class="col-7 col-lg-4">{{ model.field3 }}</div>
+                <div *ngIf="field4Label" class="col-5 col-lg-2">{{ field4Label }}:</div>
+                <div *ngIf="field4Label" class="col-7 col-lg-4">{{ model.field4 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="form-group">
+  <label for="{{ fieldId }}"><span *ngIf="fieldRequired">* </span>{{ fieldLabel }}</label>
+  <input
+    #thisInput
+    id="{{ fieldId }}"
+    name="{{ fieldName }}"
+    type="text"
+    class="form-control"
+    [class.validate]="fieldRequired"
+    [class.is-invalid]="!thisInput.checkValidity() && thisInput.classList.contains('ng-touched')"
+    [ngModel]="fieldValue"
+    (ngModelChange)="onChange($event)"
+    [required]="fieldRequired"
+    [attr.pattern]="fieldPattern"
+    [readOnly]="fieldReadOnly"
+    (blur)="onBlur($event)"
+  />
+</div>
+<div
+  *ngIf="thisInput.classList.contains('is-invalid') && fieldPatternDescription && fieldPatternDescription.length > 0"
+  style="margin-top: calc(var(--font-size) * 0.25)"
+>
+  O campo deve satisfazer os seguintes critérios:
+  <ul>
+    <li style="margin-bottom: 0;" *ngFor="let desc of fieldPatternDescription">{{ desc }}</li>
+  </ul>
+</div>

@@ -1,0 +1,58 @@
+.wireframe * {
+  outline: inset 1px yellow !important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.h1,
+h1 {
+  font-size: calc(1.375em + 1.5vw);
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  box-shadow: var(--field-box-shadow);
+}
+
+.btn {
+  --btn-min-height: 3.125em;
+  --btn-min-width: 12.5em;
+  --bs-btn-font-size: var(--font-size);
+  --bs-btn-color: var(--font-color);
+  --bs-btn-bg: var(--field-bg);
+  --bs-btn-hover-color: var(--font-color);
+  --bs-btn-hover-bg: var(--field-bg);
+  --bs-btn-active-color: var(--font-color);
+  --bs-btn-active-bg: var(--field-bg);
+  font-size: var(--font-size);
+  border: none;
+}
+
+.btn:not(.btn-new) {
+  min-height: var(--btn-min-height);
+  min-width: var(--btn-min-width);
+  margin: 0.25em;
+}
+
+.btn-new {
+  height: calc(1.375em + 2.25vw);
+  width: calc(1.375em + 2.25vw);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  box-shadow: var(--field-box-shadow);
+}

@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label for="{{ fieldId }}"><span *ngIf="fieldRequired">* </span>{{ fieldLabel }}</label>
+  <textarea
+    #thisInput
+    id="{{ fieldId }}"
+    name="{{ fieldName }}"
+    rows="{{ fieldRows }}"
+    class="form-control"
+    [class.validate]="fieldRequired"
+    [style.resize]="this.fieldResizable ? 'vertical' : 'none'"
+    [ngModel]="fieldValue"
+    (ngModelChange)="onChange($event)"
+    [required]="fieldRequired"
+    [attr.pattern]="fieldPattern"
+    [readOnly]="fieldReadOnly"
+    (blur)="onBlur($event)"
+  ></textarea>
+</div>

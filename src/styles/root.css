@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Roboto";
+  src: url(../assets/fonts/Roboto-Regular.ttf) format("truetype");
+}
+
+:root {
+  --font-family: "Roboto";
+  --font-size: 1rem;
+}
+
+body {
+  --bs-body-color: var(--font-color);
+  --bs-body-font-family: var(--font-family);
+  --bs-body-font-size: var(--font-size);
+  --bs-body-bg: var(--body-bg);
+
+  --default-box-shadow-configuration: 0 0 0.5em 0.15em;
+  --field-box-shadow: var(--default-box-shadow-configuration) var(--field-anyevent-box-shadow-color);
+  --grid-box-shadow: 0 0 2em 0.25em var(--field-anyevent-box-shadow-color);
+}
+
+.dark-theme {
+  --font-color: #eee;
+  --body-bg: #222;
+  --header-bg: #444;
+  --header-menu-bg: #393939;
+
+  /* Components */
+  --data-grid-item-bg: #2e2e2e;
+
+  /* Forms */
+  --field-bg: #333;
+  --field-anyevent-box-shadow-color: #444;
+  --field-error-box-shadow-color: rgb(220 53 69 / 25%);
+}
+
+.light-theme {
+  --font-color: #111;
+  --body-bg: #ddd;
+  --header-bg: #bbb;
+  --header-menu-bg: #c6c6c6;
+
+  /* Components */
+  --data-grid-item-bg: #d1d1d1;
+
+  /* Forms */
+  --field-bg: #ccc;
+  --field-anyevent-box-shadow-color: #bbb;
+  --field-error-box-shadow-color: rgb(220 53 69 / 25%);
+}

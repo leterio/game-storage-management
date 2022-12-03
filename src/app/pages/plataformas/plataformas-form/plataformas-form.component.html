@@ -1,0 +1,120 @@
+<page-title [title]="pageTitle"></page-title>
+<form class="form-edit container" autocomplete="off" (submit)="onSubmit()" #editForm>
+  <div class="row">
+    <div class="col-sm-12 col-lg-5 col-xl-4 order-lg-2 px-0">
+      <image-field [(fieldValue)]="imagem" [fieldReadOnly]="!editMode"></image-field>
+    </div>
+    <div class="col-sm-12 col-lg-7 col-xl-8 order-lg-1">
+      <div class="row my-2" *ngIf="editMode">
+        <div class="col">
+          <text-field
+            fieldId="cadastro-nome"
+            fieldName="nome"
+            fieldLabel="Nome"
+            [(fieldValue)]="plataforma.nome"
+            [fieldReadOnly]="!editMode"
+            [fieldRequired]="true"
+            fieldPattern=".{3,}"
+            [fieldPatternDescription]="['Comprimento igual ou superior a 3 caracteres']"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-marca"
+            fieldName="marca"
+            fieldLabel="Marca"
+            [(fieldValue)]="plataforma.marca"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-modelo"
+            fieldName="modelo"
+            fieldLabel="Modelo"
+            [(fieldValue)]="plataforma.modelo"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-12 col-xl-6">
+          <div class="row my-2">
+            <div class="col-6 my-2">
+              <check-field
+                fieldId="precisa_reparos"
+                fieldName="precisa_reparos"
+                fieldLabel="Precisa de Reparos"
+                [(fieldValue)]="plataforma.precisaReparos"
+                [fieldReadOnly]="!editMode"
+              ></check-field>
+            </div>
+            <div class="col-6 my-2">
+              <check-field
+                fieldId="emprestado"
+                fieldName="emprestado"
+                fieldLabel="Emprestado"
+                [(fieldValue)]="plataforma.emprestado"
+                [fieldReadOnly]="!editMode"
+              ></check-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+          <text-field
+            fieldId="cadastro-serial"
+            fieldName="serial"
+            fieldLabel="Serial"
+            [(fieldValue)]="plataforma.serial"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-desbloqueio"
+            fieldName="desbloqueio"
+            fieldLabel="Desbloqueio"
+            [(fieldValue)]="plataforma.desbloqueio"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <text-field
+            fieldId="cadastro-regiao"
+            fieldName="regiao"
+            fieldLabel="Região"
+            [(fieldValue)]="plataforma.regiao"
+            [fieldReadOnly]="!editMode"
+          ></text-field>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <text-area-field
+            fieldId="cadastro-detalhes"
+            fieldName="detalhes"
+            fieldLabel="Detalhes / Notas"
+            [fieldRows]="5"
+            [(fieldValue)]="plataforma.detalhes"
+            [fieldReadOnly]="!editMode"
+          ></text-area-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row py-2">
+    <div class="col">
+      <div class="text-center">
+        <button class="btn" type="button" (click)="back()">Voltar</button>
+        <button *ngIf="!editMode" class="btn" type="button" (click)="enterEditMode()">Editar</button>
+        <button *ngIf="editMode" class="btn" type="submit" [disabled]="!editForm.checkValidity()">Salvar</button>
+        <button *ngIf="editMode && newMode" class="btn" type="button" (click)="resetPage()">Limpar</button>
+        <button *ngIf="!editMode && !newMode" class="btn" type="button" (click)="remove()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</form>
